@@ -37,20 +37,29 @@ export class GithubService {
 
         
         const filteredRepositories = []
+        const branchRequests = []
 
-        // Foreach repository, get branches.
+        // Create a promise for each get branches request and load up a promise array.
         for (const repository of repositories) {
             const repositoryName = repository.full_name;
             const fork = repository.fork;
             if(!fork){
-                const filteredRepository = {repository: repositoryName, login: repository.owner.login, branches:[]}
-                const branches = await this.getBranches(repositoryName)
-                for (const branch of branches) {
-                    const sha = branch.commit.sha;
-                    const name = branch.name;
-                    filteredRepository.branches.push({branch:name , sha:sha })
-                }
-                filteredRepositories.push(filteredRepository)
+                filteredRepositories.push({repository: repositoryName, login: repository.owner.login, branches:[]})
+                branchRequests.push(this.getBranches(repositoryName));
+               
+            }
+        }
+
+        // Wait all branch requests for performance. Order is mantained.
+        const branchResponses = await Promise.all(branchRequests);
+
+        //Assign all branches to the respective repository.
+        for (let i = 0; i < filteredRepositories.length; i++) {
+            const branches = branchResponses[i].data
+            for (const branch of branches) {
+                const sha = branch.commit.sha;
+                const name = branch.name;
+                filteredRepositories[i].branches.push({branch:name , sha:sha })
             }
         }
         return filteredRepositories;
@@ -59,7 +68,6 @@ export class GithubService {
     // Get branches function.
     async getBranches(repositoryName : string){
         const requestURL = this.apiURL + `/repos/${repositoryName}/branches`
-        const response = await this.httpService.get(requestURL,{headers : this.requestHeaders}).toPromise()
-        return response.data
+        return this.httpService.get(requestURL,{headers : this.requestHeaders}).toPromise()
     }
 }

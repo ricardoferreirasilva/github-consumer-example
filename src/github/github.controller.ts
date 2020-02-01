@@ -11,8 +11,11 @@ export class GithubController {
 
     @UseGuards(GithubUserGuard)
     @Get("repositories")
-    repositories(@Query("username") username : string): any {
-        return this.githubService.getRepositories(username);
+    async repositories(@Query("username") username : string) {
+        const user = await this.githubService.getUsername(username)
+        const repositories = await this.githubService.getRepositories(username);
+        return repositories
+
     }
 
 }

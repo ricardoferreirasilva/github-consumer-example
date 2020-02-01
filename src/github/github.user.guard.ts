@@ -12,10 +12,7 @@ export class GithubUserGuard implements CanActivate {
         const accept = request.header("accept");
         const username = request.query.username;
         if(accept.match("application/json")){
-            
-            const userExists = await this.githubService.checkIfUserExists(username)
-            if(userExists) return true;
-            else throw new HttpException("Github user does not exist. ", 404)
+            return true;
         }
         else throw new HttpException("Invalid application type.",406)
     }

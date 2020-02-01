@@ -26,6 +26,14 @@
 
 ## Description
 A simple application that uses Githubs API to list repositories.
+
+## Environment Variables
+
+It is necessary to use a github OAuth token in order for the API not to be rate limited.
+1. TOKEN = (github OAuth token)
+
+You can load environment variables by creating a .env file at the root of the project.
+
 ## Installation
 
 ```bash
@@ -50,9 +58,6 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
 
 # test coverage
 $ npm run test:cov

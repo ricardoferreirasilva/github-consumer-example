@@ -1,6 +1,8 @@
 import { Injectable, HttpService, HttpException } from '@nestjs/common';
 import { catchError } from 'rxjs/operators';
 import { request } from 'express';
+import * as Environment from "dotenv"
+Environment.config()
 
 @Injectable()
 export class GithubService {
@@ -10,10 +12,10 @@ export class GithubService {
     requestHeaders : any
     constructor(private readonly httpService: HttpService){
         this.apiURL = "https://api.github.com";
-        this.requestHeaders = {"Authorization" : "token 22cd2c109eb8b0f06b97cf36c76e3bf40d94a18b"};
+        this.requestHeaders = {"Authorization" : `token ${process.env.TOKEN}`};
         this.requestSettings = {
             headers : {
-                "Authorization" : "token 22cd2c109eb8b0f06b97cf36c76e3bf40d94a18b"
+                "Authorization" : `token ${process.env.TOKEN}`
             }
         }
         

@@ -7,14 +7,16 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('Github Consumer')
-    .setDescription('')
+    .setDescription('Example of interactions with the Github API.')
     .setVersion('1.0')
     .addTag('')
     .build();
+
   const document = SwaggerModule.createDocument(app, options);
-  
+
   SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
+
 bootstrap();

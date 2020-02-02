@@ -25,11 +25,12 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
-A simple application that uses Githubs API to list repositories.
+A simple NestJS application that uses the Github API to list user repositories.
 
 ## Environment Variables
 
-It is necessary to use a github OAuth token in order for the API not to be rate limited.
+While it is possible to use the endpoint without setting up the Github access token, it is advisable to use a github OAuth token if you find yourself being rate-limited by the Github API, which only allows a certain ammount of non-authenticated requests per IP.
+
 1. TOKEN = (github OAuth token)
 
 You can load environment variables by creating a .env file at the root of the project.

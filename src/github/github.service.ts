@@ -8,14 +8,16 @@ Environment.config()
 export class GithubService {
     
     apiURL : string
-    requestSettings : any
-    requestHeaders : any
+    requestSettings : any = {}
+    requestHeaders : any = {}
     constructor(private readonly httpService: HttpService){
         this.apiURL = "https://api.github.com";
-        this.requestHeaders = {"Authorization" : `token ${process.env.TOKEN}`};
-        this.requestSettings = {
-            headers : {
-                "Authorization" : `token ${process.env.TOKEN}`
+        if(process.env.Token){
+            this.requestHeaders = {"Authorization" : `token ${process.env.TOKEN}`};
+            this.requestSettings = {
+                headers : {
+                    "Authorization" : `token ${process.env.TOKEN}`
+                }
             }
         }
         

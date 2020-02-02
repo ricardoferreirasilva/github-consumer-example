@@ -11,9 +11,12 @@ export class GithubUserGuard implements CanActivate {
         const request : Request = context.switchToHttp().getRequest();
         const accept = request.header("accept");
         const username = request.query.username;
-        if(accept.match("application/json")){
-            return true;
+        if(accept){
+            if(accept.match("application/json")){
+                return true;
+            }
+            else throw new HttpException("Invalid application type.",406)
         }
-        else throw new HttpException("Invalid application type.",406)
+        else throw new HttpException("Missing accept header.",406)
     }
 }

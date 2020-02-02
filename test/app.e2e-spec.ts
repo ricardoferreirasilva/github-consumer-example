@@ -29,6 +29,12 @@ describe('AppController (e2e)', () => {
 
   it('/github/repositories', () => {
     return request(app.getHttpServer())
+      .get('/github/repositories').query({username:"ricardoferreirasilva"})
+      .expect(406)
+  });
+
+  it('/github/repositories', () => {
+    return request(app.getHttpServer())
       .get('/github/repositories').set("Accept", "application/json").query({username:"12313forsurethisusernamedoesnotexist123123"})
       .expect(404)
   });

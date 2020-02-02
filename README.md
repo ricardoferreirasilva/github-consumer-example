@@ -74,6 +74,9 @@ $ npm run test
 
 # test coverage
 $ npm run test:cov
+
+# test end to end
+$ npm run test:e2e
 ```
 
 ## Support

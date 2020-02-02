@@ -53,6 +53,8 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+The request endpoint can be found in http://localhost:3000/github/repositories .
+It is a GET request and it expects to receive a username param and the Accept header properly set up to application/json.
 ## Test
 
 ```bash

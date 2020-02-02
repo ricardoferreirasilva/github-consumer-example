@@ -56,6 +56,16 @@ $ npm run start:prod
 
 The request endpoint can be found in http://localhost:3000/github/repositories .
 It is a GET request and it expects to receive a username param and the Accept header properly set up to application/json.
+You can find a curl example bellow.
+
+```curl
+curl -X GET \
+  'http://localhost:3000/github/repositories?username=ricardoferreirasilva' \
+  -H 'accept: application/json' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 3b64c5d0-f52d-41b6-ba12-213c356bc294' \
+```
+
 ## Test
 
 ```bash
